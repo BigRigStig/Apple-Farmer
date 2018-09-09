@@ -24,18 +24,38 @@
     <canvas id="gameCanvas" width="480" height="320"></canvas>
     <script>
         var c, ctx;
+        var snakeX = 0;
+        var snakeY = 0;
+        var snakeSize = 10;
+        var startingPos = true;
 
         window.onload = function() {
             c = document.getElementById("gameCanvas");
             ctx = c.getContext("2d");
             setInterval(mainLoop, 1000 / 50);
-        
-        }
 
-        function mainLoop(){
-            
-        }
-        
+        };
+
+        function mainLoop() {
+            colorRect(0, 0, c.width, c.height, '#eee')
+            colorRect(snakeX, snakeY, snakeSize, snakeSize, 'blue');
+
+            if (startingPos) {
+                startPos();
+                startingPos = false;
+            };
+        };
+
+        function colorRect(x, y, w, h, color) {
+            ctx.fillStyle = color;
+            ctx.fillRect(x, y, w, h);
+        };
+
+        function startPos() {
+            snakeX = c.width / 2 - snakeSize / 2;
+            snakeY = c.height / 2 - snakeSize / 2;
+        };
+
     </script>
 </body>
 
