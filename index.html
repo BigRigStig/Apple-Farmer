@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        canvas {
+            position: absolute;
+            border: 1px solid black;
+            background: #eee;
+            display: block;
+            margin: 0 auto;
+        }
+
+    </style>
+</head>
+
+<body>
+    <canvas id="gameCanvas" width="480" height="320"></canvas>
+    <script>
+        var c, ctx;
+
+        window.onload = function() {
+            c = document.getElementById("gameCanvas");
+            ctx = c.getContext("2d");
+            setInterval(mainLoop, 1000 / 50);
+        
+        }
+
+        function mainLoop(){
+            
+        }
+        
+    </script>
+</body>
+
+</html>
