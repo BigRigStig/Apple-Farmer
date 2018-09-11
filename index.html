@@ -28,11 +28,22 @@
         var snakeY = 0;
         var snakeSize = 10;
         var startingPos = true;
+        var snakeXSpeed = 10;
+        var snakeYSpeed = 10;
+        const LEFT_ARROW = 37;
+        const RIGHT_ARROW = 39;
+        const UP_ARROW = 38;
+        const DOWN_ARROW = 40;
+        var leftArrowPressed = false;
+        var rightArrowPressed = false;
+        var upArrowPressed = false;
+        var downArrowPressed = false;
 
         window.onload = function() {
             c = document.getElementById("gameCanvas");
             ctx = c.getContext("2d");
-            setInterval(mainLoop, 1000 / 50);
+            setInterval(mainLoop, 1000 / 10);
+            document.addEventListener('keydown', keyPressed);
 
         };
 
@@ -43,7 +54,11 @@
             if (startingPos) {
                 startPos();
                 startingPos = false;
+
             };
+
+            snakeMove();
+            die();
         };
 
         function colorRect(x, y, w, h, color) {
@@ -54,6 +69,72 @@
         function startPos() {
             snakeX = c.width / 2 - snakeSize / 2;
             snakeY = c.height / 2 - snakeSize / 2;
+        };
+
+        function keyPressed(evt) {
+            if (evt.keyCode == LEFT_ARROW) {
+                leftArrowPressed = true;
+                downArrowPressed = false;
+                rightArrowPressed = false;
+                upArrowPressed = false;
+            };
+            if (evt.keyCode == RIGHT_ARROW) {
+                rightArrowPressed = true;
+                downArrowPressed = false;
+                leftArrowPressed = false;
+                upArrowPressed = false;
+            };
+            if (evt.keyCode == UP_ARROW) {
+                upArrowPressed = true;
+                downArrowPressed = false;
+                rightArrowPressed = false;
+                leftArrowPressed = false;
+            };
+            if (evt.keyCode == DOWN_ARROW) {
+                downArrowPressed = true;
+                rightArrowPressed = false;
+                leftArrowPressed = false;
+                upArrowPressed = false;
+
+            };
+        };
+
+
+        /*if (evt.keyCode == LEFT_ARROW) {
+            leftArrowPressed = false;
+        };
+        if (evt.keyCode == RIGHT_ARROW) {
+            rightArrowPressed = false;
+        };
+        if (evt.keyCode == UP_ARROW) {
+            upArrowPressed = false;
+        };
+        if (evt.keyCode == DOWN_ARROW) {
+            downArrowPressed = false;
+        };*/
+
+        function snakeMove() {
+            if (leftArrowPressed) {
+                snakeX -= snakeXSpeed;
+            };
+            if (rightArrowPressed) {
+                snakeX += snakeXSpeed;
+            };
+            if (upArrowPressed) {
+                snakeY -= snakeYSpeed;
+            };
+            if (downArrowPressed) {
+                snakeY += snakeYSpeed;
+            };
+
+            
+        };
+        
+        function die(){
+          if (snakeX > c.width - snakeSize || snakeY > c.height - snakeSize || snakeX < 0 || snakeY < 0) {
+              console.log('died') 
+              location.reload();
+            }; 
         };
 
     </script>
